@@ -1,3 +1,4 @@
 #!/bin/bash
 # Dockerhub build script
 printenv
+docker build --build-arg SOURCE_BRANCH=$SOURCE_BRANCH .
