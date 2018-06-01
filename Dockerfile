@@ -1,8 +1,8 @@
 FROM debian:9
 
-ARG SOURCE_BRANCH=master
+ARG DEADLINE_INSTALLER
 
-ADD https://github.com/rojopolis/thinkbox-deadline-client/raw/$SOURCE_BRANCH/DeadlineClient-10.0.15.5-linux-x64-installer.run .
+ADD $DEADLINE_INSTALLER .
 RUN apt-get update && apt-get install -y bzip2 &&\
     chmod +x ./DeadlineClient-*.run && \
     ./DeadlineClient-*.run \
