@@ -1,8 +1,10 @@
 FROM debian:9
 
-COPY DeadlineClient-10.0.15.5-linux-x64-installer.run .
+ARG DEADLINE_INSTALLER
+
+ADD $DEADLINE_INSTALLER .
 RUN apt-get update && apt-get install -y bzip2 &&\
-    ./DeadlineClient-10.0.15.5-linux-x64-installer.run \
+    ./DeadlineClient-*.run \
     --mode unattended --repositorydir /repo && \
-    rm -f ./DeadlineClient-10.0.15.5-linux-x64-installer.run
+    rm -f ./DeadlineClient-*.run
 CMD ["/opt/Thinkbox/Deadline10/bin/deadlinelauncher", "-nogui", "-slave"]

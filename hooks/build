@@ -1,0 +1,16 @@
+#!/bin/bash -xe
+# Dockerhub build script
+# Work around Dockerhub's lack of LFS support.
+printenv
+installer="*.run"
+echo "installer=$installer"
+installer_type=$(file -i $installer | cut -d' ' -f2)
+echo "installer_type=$installer_type"
+url=https://github.com/rojopolis/thinkbox-deadline-client/raw/$SOURCE_BRANCH/DeadlineClient-10.0.15.5-linux-x64-installer.run
+
+if [ 'text/plain;' == "$installer_type" ]; then
+    rm -f $installer
+    curl -OL https://github.com/rojopolis/thinkbox-deadline-client/raw/$SOURCE_BRANCH/DeadlineClient-10.0.15.5-linux-x64-installer.run
+fi
+chmod +x $installer
+docker build --build-arg DEADLINE_INSTALLER=$installer -t $IMAGE_NAME .
