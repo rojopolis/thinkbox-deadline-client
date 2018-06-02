@@ -9,8 +9,7 @@ echo "installer_type=$installer_type"
 
 if [ 'text/plain;' == "$installer_type" ]; then
     rm -f $installer
-    installer_url=https://github.com/rojopolis/thinkbox-deadline-client/raw/$SOURCE_BRANCH/DeadlineClient-10.0.15.5-linux-x64-installer.run
+    curl -O https://github.com/rojopolis/thinkbox-deadline-client/raw/$SOURCE_BRANCH/DeadlineClient-10.0.15.5-linux-x64-installer.run
     docker build --build-arg DEADLINE_INSTALLER=$installer_url .
-else
-    docker build --build-arg DEADLINE_INSTALLER=$installer .
 fi
+docker build --build-arg DEADLINE_INSTALLER=$installer .
