@@ -13,4 +13,4 @@ if [ 'text/plain;' == "$installer_type" ]; then
     curl -OL https://github.com/rojopolis/thinkbox-deadline-client/raw/$SOURCE_BRANCH/DeadlineClient-10.0.15.5-linux-x64-installer.run
 fi
 chmod +x $installer
-docker build --build-arg DEADLINE_INSTALLER=$installer . $IMAGE_NAME
+docker build --build-arg DEADLINE_INSTALLER=$installer -t $IMAGE_NAME .
